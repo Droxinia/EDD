@@ -2,8 +2,8 @@
 
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
+import '../Signupform.dart';
 import '../signinform.dart';
 
 class Register extends StatefulWidget {
@@ -30,7 +30,7 @@ class _RegisterState extends State<Register> {
                     pageBuilder: (context, animation, secoundaryanimation) =>
                         Center(
                           child: Container(
-                            height: 620,
+                            height: 640,
                             margin: EdgeInsets.symmetric(
                                 horizontal: 29, vertical: 30),
                             padding: EdgeInsets.symmetric(
@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
                             child: Scaffold(
                               backgroundColor: Colors.transparent,
                               body: Column(
-                                children: const [
+                                children: [
                                   Text(
                                     "Sign In",
                                     style: TextStyle(
@@ -54,11 +54,55 @@ class _RegisterState extends State<Register> {
                                       vertical: 16,
                                     ),
                                     child: Text(
-                                      "View 1000's of people's story and give out a helping hand. we are all one people of one nation use our paltform to get other stories out there join us on our journey today",
+                                      "View 1000's of people's story and give out a helping hand. we are all one people of one nation use our paltform to get other stories out there join us on our journey today.",
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
-                                  Signin()
+                                  Signin(),
+                                  Divider(),
+                                  Row(
+                                    children: const [
+                                      Expanded(child: Divider()),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Text(
+                                          "OR",
+                                          style:
+                                              TextStyle(color: Colors.black26),
+                                        ),
+                                      ),
+                                      Expanded(child: Divider()),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20),
+                                    child: Text(
+                                      "sign in with google ,facebook or twitter",
+                                      style: TextStyle(color: Colors.black45),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      IconButton(
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.facebook,
+                                          )),
+                                      IconButton(
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () {},
+                                          icon: Icon(Icons.facebook_outlined)),
+                                      IconButton(
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () {},
+                                          icon: Icon(Icons.facebook_rounded))
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -70,7 +114,48 @@ class _RegisterState extends State<Register> {
             const SizedBox(
               height: 25,
             ),
-            AnimatedButton(onPressed: () {}, child: const Text("Sign Up"))
+            AnimatedButton(
+                onPressed: () {
+                  showGeneralDialog(
+                      barrierDismissible: true,
+                      barrierLabel: "Sign up",
+                      context: context,
+                      pageBuilder: (context, animation, secoundaryanimation) =>
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 16),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 30, horizontal: 24),
+                              height: 625,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(40)),
+                              child: Scaffold(
+                                backgroundColor: Colors.transparent,
+                                body: Column(
+                                  children: const [
+                                    Text(
+                                      "Sign up",
+                                      style: TextStyle(
+                                          fontSize: 34,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 16),
+                                      child: Text(
+                                        "We are happy you have chosen to join us on your journey and hope our platform will be of help to you.",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    Signupform()
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ));
+                },
+                child: const Text("Sign Up"))
           ],
         ),
       ),
