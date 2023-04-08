@@ -1,3 +1,7 @@
+import 'package:edd/Screens/Donation.dart';
+import 'package:edd/Screens/Profile.dart';
+import 'package:edd/Screens/Settings.dart';
+import 'package:edd/Screens/Voluntary.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +14,12 @@ class Base extends StatefulWidget {
 
 class _BaseState extends State<Base> {
   int _currentindex = 0;
-  final tabs = [];
+  final tabs = [
+    const Donation(),
+    const Voluntary(),
+    const Profile(),
+    const Settings()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

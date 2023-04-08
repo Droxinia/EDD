@@ -1,4 +1,4 @@
-import 'package:edd/base.dart';
+import 'package:edd/Components/base.dart';
 import 'package:flutter/material.dart';
 
 class Signin extends StatelessWidget {

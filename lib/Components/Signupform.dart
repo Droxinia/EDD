@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'base.dart';
+
 class Signupform extends StatelessWidget {
   const Signupform({
     super.key,
@@ -79,7 +81,10 @@ class Signupform extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 10, bottom: 24),
           child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Base()));
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlue,
                   minimumSize: const Size(double.infinity, 56),
@@ -92,19 +97,6 @@ class Signupform extends StatelessWidget {
               icon: const Icon(Icons.arrow_right),
               label: const Text("Sign up")),
         ),
-        // Row(
-        //   children: const [
-        //     Expanded(child: Divider()),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(horizontal: 16),
-        //       child: Text(
-        //         "Row",
-        //         style: TextStyle(color: Colors.black26),
-        //       ),
-        //     ),
-        //     Expanded(child: Divider())
-        //   ],
-        // )
       ],
     ));
   }

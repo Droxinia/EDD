@@ -3,8 +3,8 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 
-import '../Signupform.dart';
-import '../signinform.dart';
+import '../Components/Signupform.dart';
+import '../Components/signinform.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
