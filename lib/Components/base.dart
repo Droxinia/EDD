@@ -34,6 +34,8 @@ class _BaseState extends State<Base> {
           FloatingNavbarItem(icon: Icons.attach_money, title: 'Donate'),
           FloatingNavbarItem(
               icon: Icons.volunteer_activism, title: 'volunteer'),
+          FloatingNavbarItem(
+              icon: Icons.volunteer_activism, title: 'Form'),
           FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
           FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
         ],
