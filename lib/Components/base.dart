@@ -5,6 +5,8 @@ import 'package:edd/Screens/Voluntary.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../Screens/Form.dart';
+
 class Base extends StatefulWidget {
   const Base({super.key});
 
@@ -17,6 +19,7 @@ class _BaseState extends State<Base> {
   final tabs = [
     const Donation(),
     const Voluntary(),
+    const Formfillin(),
     const Profile(),
     const Settings()
   ];
