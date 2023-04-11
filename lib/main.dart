@@ -1,8 +1,5 @@
-
-import 'package:edd/Splashscreen.dart';
+import 'package:edd/Screens/Splashscreen.dart';
 import 'package:flutter/material.dart';
-
-
 
 void main() {
   runApp(const MyApp());
@@ -21,4 +18,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
