@@ -1,3 +1,4 @@
+import 'package:edd/Components/signin.dart';
 import 'package:flutter/material.dart';
 
 class Donation extends StatelessWidget {
@@ -7,7 +8,14 @@ class Donation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("donation"),
+        child: TextButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Login()));
+            },
+            child: Text('signout')),
       ),
     );
   }
