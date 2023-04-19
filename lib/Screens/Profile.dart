@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -7,7 +8,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("profile"),
+        child: Text("profile".tr().toString()),
       ),
     );
   }
