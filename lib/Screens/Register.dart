@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:animated_button/animated_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edd/Components/base.dart';
 import 'package:edd/Components/signin.dart';
 import 'package:edd/Components/signup.dart';
@@ -29,7 +30,7 @@ class _RegisterState extends State<Register> {
                     MaterialPageRoute(
                         builder: (BuildContext context) => Signup()));
               },
-              child: const Text("Sign in"),
+              child: Text("sign in".tr().toString()),
             ),
             const SizedBox(
               height: 25,
@@ -51,7 +52,7 @@ class _RegisterState extends State<Register> {
                                     }
                                   })));
                 },
-                child: const Text("Sign Up"))
+                child: Text("sign Up".tr().toString()))
           ],
         ),
       ),
