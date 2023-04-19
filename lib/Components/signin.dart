@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../main.dart';
 import 'base.dart';
@@ -40,12 +41,12 @@ class _LoginState extends State<Login> {
               controller: emailcontroller,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: 'email'.tr().toString()),
             ),
             TextField(
               controller: passwordcontroller,
               textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: 'password'),
+              decoration:  InputDecoration(labelText: 'password'.tr().toString()),
               obscureText: true,
             ),
             const SizedBox(
@@ -92,7 +93,7 @@ class _LoginState extends State<Login> {
                       MaterialPageRoute(
                           builder: (BuildContext context) => Signup()));
                 },
-                child: Text('Dont have an  accaunt'))
+                child: Text('dont have an  accaunt'.tr().toString()))
           ],
         ),
       ),
