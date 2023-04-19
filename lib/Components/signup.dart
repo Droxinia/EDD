@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -34,7 +35,7 @@ class _SignupState extends State<Signup> {
               controller: emailcontroller,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(labelText: 'email'),
+              decoration: InputDecoration(labelText: 'email'.tr().toString()),
             ),
             const SizedBox(
               height: 4,
@@ -44,7 +45,7 @@ class _SignupState extends State<Signup> {
               controller: passwordcontroller,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: 'password'),
+              decoration:  InputDecoration(labelText: 'password'.tr().toString()),
             ),
             const SizedBox(
               height: 4,
@@ -54,7 +55,7 @@ class _SignupState extends State<Signup> {
               controller: emailcontroller,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.done,
-              decoration: const InputDecoration(labelText: 'confirm password'),
+              decoration: InputDecoration(labelText: 'confirm password'.tr().toString()),
             ),
             const SizedBox(
               height: 24,
@@ -84,7 +85,7 @@ class _SignupState extends State<Signup> {
                       MaterialPageRoute(
                           builder: (BuildContext context) => Login()));
                 },
-                child: const Text('Already have an account'))
+                child: Text('already have an account'.tr().toString()))
           ],
         ),
       ),
