@@ -1,6 +1,6 @@
 import 'package:edd/Components/signin.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class Donation extends StatelessWidget {
   const Donation({super.key});
 
@@ -15,7 +15,7 @@ class Donation extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (BuildContext context) => Login()));
             },
-            child: Text('signout')),
+            child: Text('signout'.tr().toString())),
       ),
     );
   }
