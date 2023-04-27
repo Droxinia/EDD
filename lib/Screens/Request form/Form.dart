@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:edd/Screens/Request%20form/imagepicker.dart';
 import 'package:flutter/material.dart';
 
 class Formfillin extends StatefulWidget {
@@ -168,35 +169,38 @@ class _FormfillinState extends State<Formfillin> {
               SizedBox(
                 height: 20,
               ),
-              CircleAvatar(
-                radius: 90,
-                child: Icon(
-                  Icons.person,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.camera_alt,
-                        color: Colors.blueGrey,
-                      )),
-                  SizedBox(
-                    width: 80,
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.file_copy,
-                        color: Colors.blueGrey,
-                      ))
-                ],
-              )
+
+              Picture()
+              // CircleAvatar(
+              //   radius: 90,
+              //   child: Icon(
+              //     Icons.person,
+              //     size: 90,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     IconButton(
+              //         onPressed: () {},
+              //         icon: Icon(
+              //           Icons.camera_alt,
+              //           color: Colors.blueGrey,
+              //         )),
+              //     SizedBox(
+              //       width: 80,
+              //     ),
+              //     IconButton(
+              //         onPressed: () {},
+              //         icon: Icon(
+              //           Icons.file_copy,
+              //           color: Colors.blueGrey,
+              //         ))
+              //   ],
+              // )
             ],
           ),
         )
