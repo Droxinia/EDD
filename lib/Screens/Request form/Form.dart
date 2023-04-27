@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names, prefer_final_fields
+
+import 'dart:ffi';
 
 import 'package:edd/Screens/Request%20form/imagepicker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,11 @@ class Formfillin extends StatefulWidget {
 
 class _FormfillinState extends State<Formfillin> {
   var _value = "-1";
+  final Title = TextEditingController();
+  final Description = TextEditingController();
+  final Phone = TextEditingController();
+  final Address = TextEditingController();
+  final Bank = TextEditingController();
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class _FormfillinState extends State<Formfillin> {
         onStepContinue: () {
           final isLastStep = currentStep == getSteps().length - 1;
           if (isLastStep) {
-            print('complete');
+            Float();
           } else {
             setState(() {
               currentStep += 1;
@@ -113,6 +120,7 @@ class _FormfillinState extends State<Formfillin> {
                 height: 20,
               ),
               TextFormField(
+                controller: Title,
                 decoration: InputDecoration(
                     hintText: 'write the title',
                     labelText: 'Title',
@@ -123,6 +131,7 @@ class _FormfillinState extends State<Formfillin> {
                 height: 20,
               ),
               TextFormField(
+                controller: Description,
                 minLines: 2,
                 maxLines: 6,
                 keyboardType: TextInputType.multiline,
@@ -136,6 +145,7 @@ class _FormfillinState extends State<Formfillin> {
                 height: 20,
               ),
               TextFormField(
+                controller: Phone,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                     hintText: 'Phone number',
@@ -147,9 +157,19 @@ class _FormfillinState extends State<Formfillin> {
                 height: 20,
               ),
               TextFormField(
+                controller: Address,
                 keyboardType: TextInputType.streetAddress,
                 decoration: InputDecoration(
                     hintText: 'Address',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(18)))),
+              ),
+              TextFormField(
+                controller: Bank,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    hintText: 'Bank Account number',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(18)))),
@@ -169,38 +189,7 @@ class _FormfillinState extends State<Formfillin> {
               SizedBox(
                 height: 20,
               ),
-
               Picture()
-              // CircleAvatar(
-              //   radius: 90,
-              //   child: Icon(
-              //     Icons.person,
-              //     size: 90,
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     IconButton(
-              //         onPressed: () {},
-              //         icon: Icon(
-              //           Icons.camera_alt,
-              //           color: Colors.blueGrey,
-              //         )),
-              //     SizedBox(
-              //       width: 80,
-              //     ),
-              //     IconButton(
-              //         onPressed: () {},
-              //         icon: Icon(
-              //           Icons.file_copy,
-              //           color: Colors.blueGrey,
-              //         ))
-              //   ],
-              // )
             ],
           ),
         )
