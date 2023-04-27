@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ImageCard {
   final String imageUrl;
@@ -7,40 +10,57 @@ class ImageCard {
   ImageCard({required this.imageUrl, required this.description});
 }
 
-class Voluntary extends StatelessWidget {
-  final List<ImageCard> imageCards = [
-    ImageCard(
-      imageUrl:
-          'https://www.pexels.com/photo/aerial-photo-of-brown-3-story-house-2098624/',
-      description: 'Description 1',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image2.jpg',
-      description: 'Description 2',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image3.jpg',
-      description: 'Description 3',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image2.jpg',
-      description: 'Description 4',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image2.jpg',
-      description: 'Description 5',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image2.jpg',
-      description: 'Description 6',
-    ),
-    ImageCard(
-      imageUrl: 'https://example.com/image2.jpg',
-      description: 'Description 7',
-    ),
-  ];
+abstract class VoluntaryEvent {}
 
-  Voluntary({super.key});
+class LoadVoluntaryEvent extends VoluntaryEvent {}
+
+abstract class VoluntaryState {}
+
+class VoluntaryInitialState extends VoluntaryState {}
+
+class VoluntaryLoadedState extends VoluntaryState {
+  final List<ImageCard> imageCards;
+
+  VoluntaryLoadedState({required this.imageCards});
+}
+
+class VoluntaryBloc extends Bloc<VoluntaryEvent, VoluntaryState> {
+  VoluntaryBloc() : super(VoluntaryInitialState());
+
+  @override
+  Stream<VoluntaryState> mapEventToState(VoluntaryEvent event) async* {
+    if (event is LoadVoluntaryEvent) {
+      yield VoluntaryLoadedState(
+        imageCards: [
+          ImageCard(
+            imageUrl:
+                'https://www.nashvillesmls.com/uploads/agent-1/home-being-built.jpg',
+            description: 'Description 1',
+          ),
+          ImageCard(
+            imageUrl:
+                'https://govolunteeringabroad.com/wp-content/uploads/2019/10/medical5.jpg',
+            description: 'Description 2',
+          ),
+          ImageCard(
+            imageUrl:
+                'https://www.volunteerhq.org/images/projects/south-africa/volunteer-abroad-in-south-africa-ivhq-cape-town-childcare.jpg',
+            description: 'Description 3',
+          ),
+          ImageCard(
+            imageUrl: 'https://i.ytimg.com/vi/4Ry0OU08p4Y/maxresdefault.jpg',
+            description: 'Description 4',
+          ),
+        ],
+      );
+    }
+  }
+}
+
+class VoluntaryScreen extends StatelessWidget {
+  final VoluntaryBloc voluntaryBloc;
+
+  const VoluntaryScreen({super.key, required this.voluntaryBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -49,52 +69,64 @@ class Voluntary extends StatelessWidget {
         title: const Text('Image Cards'),
         backgroundColor: Colors.lightBlue,
       ),
-      body: ListView.builder(
-        itemCount: imageCards.length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetailScreen(
-                    imageUrl: imageCards[index].imageUrl,
-                    description: imageCards[index].description,
-                  ),
-                ),
-              );
-            },
-            child: Card(
-              child: Column(
-                children: [
-                  Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(imageCards[index].imageUrl),
-                        fit: BoxFit.cover,
+      body: BlocBuilder<VoluntaryBloc, VoluntaryState>(
+        bloc: voluntaryBloc,
+        builder: (context, state) {
+          if (state is VoluntaryLoadedState) {
+            return ListView.builder(
+              itemCount: state.imageCards.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(
+                          imageUrl: state.imageCards[index].imageUrl,
+                          description: state.imageCards[index].description,
+                        ),
                       ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                        topRight: Radius.circular(4),
-                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 150,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  state.imageCards[index].imageUrl),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4),
+                              topRight: Radius.circular(4),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            state.imageCards[index].description,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      imageCards[index].description,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+                );
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
     );
@@ -106,7 +138,8 @@ class DetailScreen extends StatelessWidget {
   final String description;
 
   const DetailScreen(
-      {super.key, required this.imageUrl, required this.description});
+      {Key? key, required this.imageUrl, required this.description})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

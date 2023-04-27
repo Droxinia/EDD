@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:edd/Screens/Register.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Splashscreen extends StatelessWidget {
   const Splashscreen({super.key});
@@ -24,10 +25,10 @@ class Splashscreen extends StatelessWidget {
                 repeat: true,
                 fit: BoxFit.cover),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.fromLTRB(25, 190, 20, 50),
             child: Text(
-              "     Ethiopian Digital Donations",
+              "     ethiopian Digital Donations".tr().toString(),
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.normal,

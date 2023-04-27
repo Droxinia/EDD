@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:animated_button/animated_button.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:edd/Components/base.dart';
+import 'package:edd/Components/signin.dart';
+import 'package:edd/Components/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../Components/Signupform.dart';
-import '../Components/signinform.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -17,145 +19,112 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showGeneralDialog
+                  
+                  (barrierDismissible: true,barrierLabel: 'languages'.tr().toString(),context:context, pageBuilder: ((context, animation, secondaryAnimation) => Center(
+                    child: Container(
+                      height: 320,
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(vertical: 32,horizontal: 24),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(40)
+                      ),
+                      child: Scaffold(
+                        backgroundColor: Colors.transparent,
+                        body: Center(
+                          child: Column(children: [
+                            Text('languages'.tr().toString(), style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                            Padding( 
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text('change-language'.tr().toString(),textAlign: TextAlign.center,),
+                            ),
+                           GestureDetector(
+                            onTap: () => context.locale = const Locale('en','US'),   
+                             child: Container(
+                              height: 50,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                color: Colors.white60,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Center(child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [CircleAvatar(backgroundImage: AssetImage('assets/images/1.jpg'), radius: MediaQuery.of(context).size.height *0.02,),
+                                  Text('English'),
+                                ],
+                              )),
+                             ),
+                           ),
+                           SizedBox(height: 10,),
+                           GestureDetector(
+                            onTap: () => context.locale = const Locale('am','ETH'),
+                             child: Container(
+                              height: 50,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                
+                                color: Colors.white60,
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              child: Center(child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [CircleAvatar(backgroundImage: AssetImage('assets/images/2.jpg'), radius: MediaQuery.of(context).size.height *0.02,),
+                                  Text('amharic'.tr().toString()),
+                                ],
+                              ),
+                              ),
+                             ),
+                           ),
+                          ],),
+                        ),
+                      ),
+                    ),
+                  )
+                  ),
+                  );
+        },
+        child: Icon(Icons.language),
+      ),
+      
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 430, 0, 0),
         child: Column(
           children: [
             AnimatedButton(
               onPressed: () {
-                showGeneralDialog(
-                    barrierDismissible: true,
-                    barrierLabel: "sign in",
-                    context: context,
-                    pageBuilder: (context, animation, secoundaryanimation) =>
-                        Center(
-                          child: Container(
-                            height: 640,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 29, vertical: 30),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 32, horizontal: 24),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(40))),
-                            child: Scaffold(
-                              backgroundColor: Colors.transparent,
-                              body: Column(
-                                children: [
-                                  Text(
-                                    "Sign In",
-                                    style: TextStyle(
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 16,
-                                    ),
-                                    child: Text(
-                                      "View 1000's of people's story and give out a helping hand. we are all one people of one nation use our paltform to get other stories out there join us on our journey today.",
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Signin(),
-                                  Divider(),
-                                  Row(
-                                    children: const [
-                                      Expanded(child: Divider()),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          "OR",
-                                          style:
-                                              TextStyle(color: Colors.black26),
-                                        ),
-                                      ),
-                                      Expanded(child: Divider()),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20),
-                                    child: Text(
-                                      "sign in with our website",
-                                      style: TextStyle(color: Colors.black45),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.facebook,
-                                          )),
-                                      IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () {},
-                                          icon: Icon(Icons.facebook_outlined)),
-                                      IconButton(
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () {},
-                                          icon: Icon(Icons.facebook_rounded))
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Signup()));
               },
-              child: const Text("Sign in"),
+              child: Text("sign in".tr().toString()),
             ),
             const SizedBox(
               height: 25,
             ),
             AnimatedButton(
                 onPressed: () {
-                  showGeneralDialog(
-                      barrierDismissible: true,
-                      barrierLabel: "Sign up",
-                      context: context,
-                      pageBuilder: (context, animation, secoundaryanimation) =>
-                          Center(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 16),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 30, horizontal: 24),
-                              height: 625,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(40)),
-                              child: Scaffold(
-                                backgroundColor: Colors.transparent,
-                                body: Column(
-                                  children: const [
-                                    Text(
-                                      "Sign up",
-                                      style: TextStyle(
-                                          fontSize: 34,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 16),
-                                      child: Text(
-                                        "We are happy you have chosen to join us on your journey and hope our platform will be of help to you.",
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Signupform()
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              StreamBuilder<User?>(
+                                  stream:
+                                      FirebaseAuth.instance.authStateChanges(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Base();
+                                    } else {
+                                      return Signup();
+                                    }
+                                  })));
                 },
-                child: const Text("Sign Up"))
+                child: Text("sign Up".tr().toString()))
           ],
         ),
       ),
