@@ -3,9 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
+import 'Components/Repo/Reporepository.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +18,7 @@ Future main() async {
     path: 'assets/translations',
     saveLocale: true,
     fallbackLocale: const Locale('en', 'US'),
-    child: const MyApp(),
+    child: MyApp(),
   ));
 }
 
@@ -35,7 +33,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'EDD',
-      home: const Splashscreen(),
+      home: RepositoryProvider(
+        create: (context) => DONATIONRepository(),
+        child: Container(),
+      ),
       debugShowCheckedModeBanner: false,
       // loclization
       localizationsDelegates: context.localizationDelegates,

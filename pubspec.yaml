@@ -38,7 +38,7 @@ dependencies:
   lottie: ^2.3.1
   floating_bottom_navigation_bar: ^1.5.2
   animated_button: ^0.2.0
-  cloud_firestore: ^4.5.0
+  cloud_firestore: ^4.5.3
   firebase_core: ^2.9.0
   firebase_auth: ^4.4.0
   auto_validate: ^1.0.8
@@ -47,6 +47,8 @@ dependencies:
   tabbar: ^0.1.1
   path_provider: ^2.0.14
   image_picker: ^0.8.7+4
+  equatable: ^2.0.5
+  bloc: ^8.1.1
  
 
 dev_dependencies:
