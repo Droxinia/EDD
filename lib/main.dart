@@ -2,6 +2,7 @@ import 'package:edd/Screens/Splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:provider/provider.dart';
 
 import 'Components/Repo/Reporepository.dart';
 
@@ -24,9 +25,14 @@ Future main() async {
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -35,8 +41,9 @@ class MyApp extends StatelessWidget {
       title: 'EDD',
       home: RepositoryProvider(
         create: (context) => DONATIONRepository(),
-        child: Container(),
+        child: const Splashscreen(),
       ),
+
       debugShowCheckedModeBanner: false,
       // loclization
       localizationsDelegates: context.localizationDelegates,

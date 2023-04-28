@@ -165,6 +165,9 @@ class _FormfillinState extends State<Formfillin> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(18)))),
               ),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: Bank,
                 keyboardType: TextInputType.phone,
