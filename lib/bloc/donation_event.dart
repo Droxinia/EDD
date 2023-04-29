@@ -21,5 +21,5 @@ class Create extends DonationEvent {
 }
 
 class GetData extends DonationEvent {
-  GetData();
+  const GetData();
 }
