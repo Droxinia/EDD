@@ -2,8 +2,11 @@
 
 import 'dart:ffi';
 
+import 'package:edd/Components/Repo/Reporepository.dart';
 import 'package:edd/Screens/Request%20form/imagepicker.dart';
+import 'package:edd/bloc/donation_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Formfillin extends StatefulWidget {
   const Formfillin({super.key});
@@ -22,51 +25,81 @@ class _FormfillinState extends State<Formfillin> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Stepper(
-        type: StepperType.horizontal,
-        steps: getSteps(),
-        currentStep: currentStep,
-        onStepContinue: () {
-          final isLastStep = currentStep == getSteps().length - 1;
-          if (isLastStep) {
-            Float();
-          } else {
-            setState(() {
-              currentStep += 1;
-            });
+    return BlocProvider(
+      create: (context) => DonationBloc(
+          donationRepository:
+              RepositoryProvider.of<DONATIONRepository>(context)),
+      child: Scaffold(
+          body: BlocListener<DonationBloc, DonationState>(
+        listener: (context, state) {
+          // TODO: implement listener
+          if (state is Donationadded) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Donation requested'),
+              duration: Duration(seconds: 3),
+            ));
           }
         },
-        onStepCancel: currentStep == 0
-            ? null
-            : () => setState(() {
-                  currentStep -= 1;
-                }),
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
-          final isLastStep = currentStep == getSteps().length - 1;
-          return Container(
-            margin: EdgeInsets.only(top: 50),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                    child: ElevatedButton(
-                        onPressed: details.onStepContinue,
-                        child: Text(isLastStep ? 'confirm' : 'Next'))),
-                SizedBox(
-                  width: 12,
-                ),
-                if (currentStep != 0)
-                  Expanded(
-                      child: ElevatedButton(
-                          onPressed: details.onStepCancel,
-                          child: Text('Back'))),
-              ],
-            ),
-          );
-        },
-      ),
-    ));
+        child: BlocBuilder<DonationBloc, DonationState>(
+          builder: (context, state) {
+            if (state is Donationadded) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is Donationerror) {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+            return SafeArea(
+              child: Stepper(
+                type: StepperType.horizontal,
+                steps: getSteps(),
+                currentStep: currentStep,
+                onStepContinue: () {
+                  final isLastStep = currentStep == getSteps().length - 1;
+                  if (isLastStep) {
+                    _postdata(context);
+                  } else {
+                    setState(() {
+                      currentStep += 1;
+                    });
+                  }
+                },
+                onStepCancel: currentStep == 0
+                    ? null
+                    : () => setState(() {
+                          currentStep -= 1;
+                        }),
+                controlsBuilder:
+                    (BuildContext context, ControlsDetails details) {
+                  final isLastStep = currentStep == getSteps().length - 1;
+                  return Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: ElevatedButton(
+                                onPressed: details.onStepContinue,
+                                child: Text(isLastStep ? 'confirm' : 'Next'))),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        if (currentStep != 0)
+                          Expanded(
+                              child: ElevatedButton(
+                                  onPressed: details.onStepCancel,
+                                  child: Text('Back'))),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      )),
+    );
   }
 
   List<Step> getSteps() => [
@@ -197,4 +230,9 @@ class _FormfillinState extends State<Formfillin> {
           ),
         )
       ];
+
+  void _postdata(context) {
+    BlocProvider.of<DonationBloc>(context).add(Create(Title.text, Address.text,
+        Bank.hashCode, Description.text, Phone.hashCode));
+  }
 }

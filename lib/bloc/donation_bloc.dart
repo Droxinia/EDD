@@ -13,7 +13,7 @@ class DonationBloc extends Bloc<DonationEvent, DonationState> {
       await Future.delayed(const Duration(seconds: 1));
       try {
         await donationRepository.create(
-            Title: event.Name,
+            Title: event.Title,
             Description: event.Description,
             Phone: event.Phone,
             Bank_Account: event.Bank_Account,

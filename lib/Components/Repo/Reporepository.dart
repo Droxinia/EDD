@@ -14,7 +14,7 @@ class DONATIONRepository {
       required String Address}) async {
     try {
       await _fireCloud.add({
-        "Name": Title,
+        "Title": Title,
         "Description": Description,
         "Phone": Phone,
         "Bank": Bank_Account,

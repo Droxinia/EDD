@@ -10,12 +10,12 @@ abstract class DonationEvent extends Equatable {
 }
 
 class Create extends DonationEvent {
-  final String Name;
+  final String Title;
   final String Description;
   final int Phone;
   final int Bank_Account;
   final String Address;
 
-  const Create(
-      this.Name, this.Address, this.Bank_Account, this.Description, this.Phone);
+  const Create(this.Title, this.Address, this.Bank_Account, this.Description,
+      this.Phone);
 }
