@@ -19,3 +19,7 @@ class Create extends DonationEvent {
   const Create(this.Title, this.Address, this.Bank_Account, this.Description,
       this.Phone);
 }
+
+class GetData extends DonationEvent {
+  GetData();
+}

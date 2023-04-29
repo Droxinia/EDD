@@ -32,24 +32,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DonationBloc(
-          donationRepository:
-              RepositoryProvider.of<DONATIONRepository>(context)),
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        title: 'EDD',
-        home: RepositoryProvider(
-          create: (context) => DONATIONRepository(),
-          child: const Splashscreen(),
-        ),
-
-        debugShowCheckedModeBanner: false,
-        // loclization
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      title: 'EDD',
+      home: RepositoryProvider(
+        create: (context) => DONATIONRepository(),
+        child: const Splashscreen(),
       ),
+
+      debugShowCheckedModeBanner: false,
+      // loclization
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

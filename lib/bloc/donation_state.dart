@@ -32,3 +32,15 @@ class Donationerror extends DonationState {
   @override
   List<Object> get props => [];
 }
+
+class DonationLoading extends DonationState {
+  @override
+  List<Object> get props => [];
+}
+
+class DonationLoaded extends DonationState {
+  List<DonationModel> mydata;
+  DonationLoaded(this.mydata);
+  @override
+  List<Object> get props => [];
+}

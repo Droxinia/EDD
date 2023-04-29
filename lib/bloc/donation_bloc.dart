@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:bloc/bloc.dart';
 import 'package:edd/Components/Repo/Reporepository.dart';
+import 'package:edd/Components/model.dart';
 import 'package:equatable/equatable.dart';
 
 part 'donation_event.dart';
@@ -19,6 +22,18 @@ class DonationBloc extends Bloc<DonationEvent, DonationState> {
             Bank_Account: event.Bank_Account,
             Address: event.Address);
         emit(Donationadded());
+      } catch (e) {
+        emit(Donationerror(e.toString()));
+      }
+    });
+
+    on<GetData>((event, emit) async {
+      emit(DonationLoading());
+      await Future.delayed(const Duration(seconds: 1));
+
+      try {
+        final data = await donationRepository.get();
+        emit(DonationLoaded(data));
       } catch (e) {
         emit(Donationerror(e.toString()));
       }
