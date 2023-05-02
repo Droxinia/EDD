@@ -1,6 +1,7 @@
-import 'package:edd/Components/signin.dart';
+import 'package:edd/Screens/Register/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class Donation extends StatelessWidget {
   const Donation({super.key});
 

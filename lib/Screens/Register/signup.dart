@@ -1,26 +1,20 @@
-// ignore_for_file: unnecessary_import, implementation_imports
-
-import 'package:edd/Components/signup.dart';
+import 'package:edd/Screens/Register/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import '../main.dart';
-import 'base.dart';
-
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginState extends State<Login> {
+class _SignupState extends State<Signup> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
-
   @override
   void dispose() {
     emailcontroller.dispose();
@@ -31,10 +25,8 @@ class _LoginState extends State<Login> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
               height: 40,
@@ -45,44 +37,44 @@ class _LoginState extends State<Login> {
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(labelText: 'email'.tr().toString()),
             ),
+            const SizedBox(
+              height: 4,
+            ),
             TextField(
-              controller: passwordcontroller,
-              textInputAction: TextInputAction.done,
-              decoration:  InputDecoration(labelText: 'password'.tr().toString()),
               obscureText: true,
+              controller: passwordcontroller,
+              cursorColor: Colors.white,
+              textInputAction: TextInputAction.done,
+              decoration:
+                  InputDecoration(labelText: 'password'.tr().toString()),
             ),
             const SizedBox(
-              height: 20,
+              height: 4,
+            ),
+            TextField(
+              obscureText: true,
+              controller: emailcontroller,
+              cursorColor: Colors.white,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                  labelText: 'confirm password'.tr().toString()),
+            ),
+            const SizedBox(
+              height: 24,
             ),
             ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50)),
                 onPressed: () async {
-                  // showDialog(
-                  //     context: context,
-                  //     builder: (context) => Center(
-                  //           child: CircularProgressIndicator(),
-                  //         ));
                   try {
-                    final cred = await FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                            email: emailcontroller.text.trim(),
-                            password: passwordcontroller.text.trim());
-
-                    if (cred.user?.email != null) {
-                      navigatorKey.currentState!.pushAndRemoveUntil(
-                        MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const Base()),
-                        ModalRoute.withName('/'),
-                      );
-                    }
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: emailcontroller.text.trim(),
+                        password: passwordcontroller.text.trim());
                   } on FirebaseAuthException catch (e) {
                     print(e);
                   }
                 },
-                icon: const Icon(Icons.lock_open),
+                icon: const Icon(Icons.arrow_forward),
                 label: const Text(
-                  'signin',
+                  'signup',
                   style: TextStyle(fontSize: 24),
                 )),
             const SizedBox(
@@ -93,9 +85,9 @@ class _LoginState extends State<Login> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => Signup()));
+                          builder: (BuildContext context) => Login()));
                 },
-                child: Text('dont have an  accaunt'.tr().toString()))
+                child: Text('already have an account'.tr().toString()))
           ],
         ),
       ),

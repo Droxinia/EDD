@@ -43,6 +43,12 @@ dependencies:
   firebase_auth: ^4.4.0
   auto_validate: ^1.0.8
   easy_localization: ^3.0.1
+  gradle_properties: ^1.0.0
+  tabbar: ^0.1.1
+  path_provider: ^2.0.14
+  image_picker: ^0.8.7+4
+ 
+
   flutter_bloc: ^8.1.2
 
 dev_dependencies:
