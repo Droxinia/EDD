@@ -50,6 +50,8 @@ dependencies:
  
 
   flutter_bloc: ^8.1.2
+  flat_3d_button: ^1.0.3
+  flat_icons_flutter: ^1.0.2
 
 dev_dependencies:
   flutter_test:
