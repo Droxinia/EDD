@@ -46,10 +46,13 @@ dependencies:
   gradle_properties: ^1.0.0
   tabbar: ^0.1.1
   path_provider: ^2.0.14
-  image_picker: ^0.8.7+4
+  image_picker: ^0.8.6
  
 
   flutter_bloc: ^8.1.2
+  flat_3d_button: ^1.0.3
+  flat_icons_flutter: ^1.0.2
+  firebase_storage: ^11.1.1
 
 dev_dependencies:
   flutter_test:

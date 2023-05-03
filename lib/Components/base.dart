@@ -19,9 +19,9 @@ class _BaseState extends State<Base> {
   int _currentindex = 0;
   final tabs = [
     const Donation(),
-    Voluntary(),
+    const Voluntary(),
     const Formfillin(),
-    const Profile(),
+    ProfilePage(),
     const Settings()
   ];
   @override
