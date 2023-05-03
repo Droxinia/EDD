@@ -21,7 +21,7 @@ class _BaseState extends State<Base> {
     const Donation(),
     const Voluntary(),
     const Formfillin(),
-    Profile(),
+    ProfilePage(),
     const Settings()
   ];
   @override
