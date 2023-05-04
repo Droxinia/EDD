@@ -13,6 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
   File? _image;
 
   Future getImageFromCamera() async {
+    // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     setState(() {
       if (pickedFile != null) {
@@ -97,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 80,
                 backgroundColor: Colors.grey[200],
                 child: _image == null
-                    ? Icon(Icons.person, size: 80, color: Colors.grey)
+                    ? const Icon(Icons.person, size: 80, color: Colors.grey)
                     : ClipOval(
                         child: Image.file(_image!,
                             width: 160, height: 160, fit: BoxFit.cover),
