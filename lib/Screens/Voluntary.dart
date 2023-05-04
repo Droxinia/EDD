@@ -1,313 +1,220 @@
-// import 'package:easy_localization/easy_localization.dart';
-// import 'package:flutter/material.dart';
-// import 'package:bloc/bloc.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
-// class ImageCard {
-//   final String imageUrl;
-//   final String description;
-
-//   ImageCard({required this.imageUrl, required this.description});
-// }
-
-// abstract class VoluntaryEvent {}
-
-// class LoadVoluntaryEvent extends VoluntaryEvent {}
-
-// abstract class VoluntaryState {}
-
-// class VoluntaryInitialState extends VoluntaryState {}
-
-// class VoluntaryLoadedState extends VoluntaryState {
-//   final List<ImageCard> imageCards;
-
-//   VoluntaryLoadedState({required this.imageCards});
-// }
-
-// class VoluntaryBloc extends Bloc<VoluntaryEvent, VoluntaryState> {
-//   VoluntaryBloc() : super(VoluntaryInitialState());
-
-//   @override
-//   Stream<VoluntaryState> mapEventToState(VoluntaryEvent event) async* {
-//     if (event is LoadVoluntaryEvent) {
-//       yield VoluntaryLoadedState(
-//         imageCards: [
-//           ImageCard(
-//             imageUrl:
-//                 'https://www.nashvillesmls.com/uploads/agent-1/home-being-built.jpg',
-//             description: 'Description 1',
-//           ),
-//           ImageCard(
-//             imageUrl:
-//                 'https://govolunteeringabroad.com/wp-content/uploads/2019/10/medical5.jpg',
-//             description: 'Description 2',
-//           ),
-//           ImageCard(
-//             imageUrl:
-//                 'https://www.volunteerhq.org/images/projects/south-africa/volunteer-abroad-in-south-africa-ivhq-cape-town-childcare.jpg',
-//             description: 'Description 3',
-//           ),
-//           ImageCard(
-//             imageUrl: 'https://i.ytimg.com/vi/4Ry0OU08p4Y/maxresdefault.jpg',
-//             description: 'Description 4',
-//           ),
-//         ],
-//       );
-//     }
-//   }
-// }
-
-// class VoluntaryScreen extends StatelessWidget {
-//   final VoluntaryBloc voluntaryBloc;
-
-//   const VoluntaryScreen({super.key, required this.voluntaryBloc});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Image Cards'),
-//         backgroundColor: Colors.lightBlue,
-//       ),
-//       body: BlocBuilder<VoluntaryBloc, VoluntaryState>(
-//         bloc: voluntaryBloc,
-//         builder: (context, state) {
-//           if (state is VoluntaryLoadedState) {
-//             return ListView.builder(
-//               itemCount: state.imageCards.length,
-//               itemBuilder: (BuildContext context, int index) {
-//                 return GestureDetector(
-//                   onTap: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                         builder: (context) => DetailScreen(
-//                           imageUrl: state.imageCards[index].imageUrl,
-//                           description: state.imageCards[index].description,
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   child: Card(
-//                     child: Column(
-//                       children: [
-//                         Container(
-//                           height: 150,
-//                           width: double.infinity,
-//                           decoration: BoxDecoration(
-//                             image: DecorationImage(
-//                               image: NetworkImage(
-//                                   state.imageCards[index].imageUrl),
-//                               fit: BoxFit.cover,
-//                             ),
-//                             borderRadius: const BorderRadius.only(
-//                               topLeft: Radius.circular(4),
-//                               topRight: Radius.circular(4),
-//                             ),
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(16),
-//                           child: Text(
-//                             state.imageCards[index].description,
-//                             style: const TextStyle(
-//                               fontSize: 18,
-//                               fontWeight: FontWeight.bold,
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             );
-//           } else {
-//             return const Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
-
-// class DetailScreen extends StatelessWidget {
-//   final String imageUrl;
-//   final String description;
-
-//   const DetailScreen(
-//       {Key? key, required this.imageUrl, required this.description})
-//       : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Detail Screen'),
-//         backgroundColor: Colors.lightBlue,
-//       ),
-//       body: Column(
-//         children: [
-//           Container(
-//             height: 300,
-//             decoration: BoxDecoration(
-//               image: DecorationImage(
-//                 image: NetworkImage(imageUrl),
-//                 fit: BoxFit.cover,
-//               ),
-//               borderRadius: const BorderRadius.only(
-//                 bottomLeft: Radius.circular(16),
-//                 bottomRight: Radius.circular(16),
-//               ),
-//             ),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 IconButton(
-//                   icon: const Icon(Icons.arrow_back),
-//                   onPressed: () {
-//                     Navigator.pop(context);
-//                   },
-//                 ),
-//                 const Text(
-//                   'Detail Screen',
-//                   style: TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 24,
-//                   ),
-//                 ),
-//                 IconButton(
-//                   icon: const Icon(Icons.more_vert),
-//                   onPressed: () {},
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Expanded(
-//             child: Padding(
-//               padding: const EdgeInsets.all(16),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     description,
-//                     style: const TextStyle(
-//                       fontSize: 24,
-//                       fontWeight: FontWeight.bold,
-//                     ),
-//                   ),
-//                   const SizedBox(height: 16),
-//                   const Text(
-//                     'Lorem ipsum dolor sitamet, consectetur adipiscing elit. Nullam in velit eget urna facilisis ultrices et sed erat. Morbi a est lectus. Integer euismod, lacus ut faucibus tristique, mi quam laoreet libero, eu hendrerit odio justo eget lacus. Donec ornare enim a nisi convallis, vel tristique quam faucibus. Sed at sapien ut nisl facilisis feugiat. Nam eu lorem id turpis congue ullamcorper. Ut pharetra massa non ipsum varius, non rhoncus justo iaculis. Integer non nunc in mauris interdum egestas vel sit amet velit. Sed eget lorem a erat blandit suscipit non non purus. Sed vel consectetur massa. Ut et tellus malesuada, bibendum felis vitae, feugiat lectus. Nullam feugiat dolor et augue euismod, id sollicitudin magna aliquam. Integer scelerisque risus vel turpis pretium aliquet. Ut sodales eros vitae felis fringilla, a semper arcu gravida. ',
-//                     style: TextStyle(
-//                       fontSize: 16,
-//                     ),
-//                   ),
-//                   const SizedBox(height: 16),
-//                   Align(
-//                     alignment: Alignment.centerRight,
-//                     child: ElevatedButton(
-//                       onPressed: () {
-//                         showModalBottomSheet(
-//                           context: context,
-//                           builder: (BuildContext context) {
-//                             return Center(
-//                               child: Container(
-//                                 height: 300,
-//                                 padding: const EdgeInsets.all(16),
-//                                 child: Column(
-//                                   crossAxisAlignment:
-//                                       CrossAxisAlignment.stretch,
-//                                   children: [
-//                                     const Text(
-//                                       'Contact Seller',
-//                                       style: TextStyle(
-//                                         fontSize: 20,
-//                                         fontWeight: FontWeight.bold,
-//                                       ),
-//                                     ),
-//                                     const SizedBox(height: 16),
-//                                     const TextField(
-//                                       decoration: InputDecoration(
-//                                         labelText: 'Name',
-//                                         border: OutlineInputBorder(),
-//                                       ),
-//                                     ),
-//                                     const SizedBox(height: 16),
-//                                     const TextField(
-//                                       decoration: InputDecoration(
-//                                         labelText: 'Email',
-//                                         border: OutlineInputBorder(),
-//                                       ),
-//                                     ),
-//                                     const SizedBox(height: 16),
-//                                     const TextField(
-//                                       maxLines: 4,
-//                                       decoration: InputDecoration(
-//                                         labelText: 'Message',
-//                                         border: OutlineInputBorder(),
-//                                       ),
-//                                     ),
-//                                     const SizedBox(height: 16),
-//                                     ElevatedButton(
-//                                       onPressed: () {
-//                                         Navigator.pop(context);
-//                                         ScaffoldMessenger.of(context)
-//                                             .showSnackBar(
-//                                           const SnackBar(
-//                                             content: Text('Message sent'),
-//                                           ),
-//                                         );
-//                                       },
-//                                       child: const Text('Submit'),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             );
-//                           },
-//                         );
-//                       },
-//                       style: ElevatedButton.styleFrom(
-//                         backgroundColor: Colors.lightBlue,
-//                         padding: const EdgeInsets.symmetric(
-//                           horizontal: 32,
-//                           vertical: 16,
-//                         ),
-//                         shape: RoundedRectangleBorder(
-//                           borderRadius: BorderRadius.circular(32),
-//                         ),
-//                       ),
-//                       child: const Text(
-//                         'Contact Seller',
-//                         style: TextStyle(
-//                           color: Colors.white,
-//                           fontSize: 18,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Voluntary extends StatelessWidget {
-  const Voluntary({super.key});
+class DonationRequestPage extends StatefulWidget {
+  @override
+  _DonationRequestPageState createState() => _DonationRequestPageState();
+}
+
+class _DonationRequestPageState extends State<DonationRequestPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _phoneController = TextEditingController();
+  String _imageUrl = '';
+  late DateTime _requestTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestTime = DateTime.now();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  void _submitForm() async {
+    if (_formKey.currentState!.validate()) {
+      final title = _titleController.text;
+      final description = _descriptionController.text;
+      final phone = _phoneController.text;
+
+      await FirebaseFirestore.instance.collection('volunteers').add({
+        'title': title,
+        'description': description,
+        'phone': phone,
+        'imageUrl': _imageUrl,
+        'requestTime': _requestTime,
+      });
+
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Request Donation'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Title',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter a title';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter a description';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter a phone number';
+                  }
+                  return null;
+                },
+              ),
+              ElevatedButton(
+                onPressed: _submitForm,
+                child: Text('Request Donation'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class VolunteerPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Volunteer'),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('volunteers').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          final documents = snapshot.data?.docs;
+
+          return ListView.builder(
+            itemCount: documents?.length,
+            itemBuilder: (context, index) {
+              final document = documents![index];
+              final title = document['title'];
+              final description = document['description'];
+              final phone = document['phone'];
+              final imageUrl = document['imageUrl'];
+              final requestTime = document['requestTime'].toDate();
+
+              return ListTile(
+                leading: imageUrl != null ? Image.network(imageUrl) : null,
+                title: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(requestTime.toString()),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DonationDetailsPage(
+                        title: title,
+                        description: description,
+                        phone: phone,
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class DonationDetailsPage extends StatelessWidget {
+  const DonationDetailsPage({
+    Key? key,
+    required this.title,
+    required this.description,
+    required this.phone,
+  }) : super(key: key);
+  final String title;
+  final String description;
+  final String phone;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Phone: $phone',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
