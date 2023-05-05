@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -64,8 +65,8 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
-                  labelText: 'Title',
+                decoration:  InputDecoration(
+                  labelText: 'title'.tr().toString(),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -76,8 +77,8 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(
-                  labelText: 'Description',
+                decoration:  InputDecoration(
+                  labelText: 'description'.tr().toString(),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -88,8 +89,8 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
+                decoration:  InputDecoration(
+                  labelText: 'phone number'.tr().toString(),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -128,7 +129,7 @@ class VolunteerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Volunteer'),
+        title:  Text('volunteer'.tr().toString()),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('volunteers').snapshots(),

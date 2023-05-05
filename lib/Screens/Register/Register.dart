@@ -135,9 +135,9 @@ class _RegisterState extends State<Register> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children:  <Widget>[
               Text(
-                'One country',
+                'one country'.tr().toString(),
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Text(
-                'one people',
+                'one people'.tr().toString(),
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -153,7 +153,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Text(
-                'Together',
+                'together'.tr().toString(),
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class _RegisterState extends State<Register> {
                     onPrimary: Colors.blue,
                   ),
                   child: Text(
-                    'Sign up',
+                    'Sign up'.tr().toString(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -212,7 +212,7 @@ class _RegisterState extends State<Register> {
                     onPrimary: Colors.blue,
                   ),
                   child: Text(
-                    'Continue',
+                    'continue'.tr().toString(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

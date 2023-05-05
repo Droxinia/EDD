@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'Register/Register.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,7 +16,6 @@ class _ProfilePageState extends State<ProfilePage> {
   File? _image;
 
   Future getImageFromCamera() async {
-    // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     setState(() {
       if (pickedFile != null) {
@@ -50,13 +52,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Profile',
+             Text(
+              'profile'.tr().toString(),
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -72,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: <Widget>[
                           ListTile(
                             leading: Icon(Icons.camera_alt),
-                            title: Text('Take a picture'),
+                            title: Text('take a picture'.tr().toString()),
                             onTap: () async {
                               Navigator.pop(context);
                               await getImageFromCamera();
@@ -81,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           ListTile(
                             leading: Icon(Icons.photo_library),
-                            title: Text('Choose from gallery'),
+                            title: Text('choose from gallery'.tr().toString()),
                             onTap: () async {
                               Navigator.pop(context);
                               await getImageFromGallery();
@@ -95,16 +98,49 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               },
               child: CircleAvatar(
-                radius: 80,
+                radius: 90,
                 backgroundColor: Colors.grey[200],
                 child: _image == null
-                    ? const Icon(Icons.person, size: 80, color: Colors.grey)
+                    ? Icon(Icons.person, size: 80, color: Colors.grey)
                     : ClipOval(
                         child: Image.file(_image!,
                             width: 160, height: 160, fit: BoxFit.cover),
                       ),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              user.email!,
+              style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+                  ),
+            SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+              child: FloatingActionButton(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.power_settings_new,
+                  color: Colors.red,
+                ),
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Register()
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
