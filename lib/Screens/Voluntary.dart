@@ -100,20 +100,19 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: const Text('Request Donation'),
-              ),
-              const SizedBox(
-                height: 30,
+                child: Text('Request for Volunteer'),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => VolunteerPage()),
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => VolunteerPage()));
                 },
-                child: const Text('Go to Volunteer Page'),
-              )
+                child: Text('go to list'),
+             
+              ),
+              
             ],
           ),
         ),

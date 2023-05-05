@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       title: 'EDD',
-      home: const Splashscreen(),
+      home: Splashscreen(),
       debugShowCheckedModeBanner: false,
       // loclization
       localizationsDelegates: context.localizationDelegates,
