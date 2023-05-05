@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -119,7 +120,7 @@ class _FormFillInPageState extends State<FormFillInPage> {
                             children: <Widget>[
                               ListTile(
                                 leading: Icon(Icons.camera_alt),
-                                title: Text('Take a picture'),
+                                title: Text('take a picture'.tr().toString()),
                                 onTap: () {
                                   _getImageFromCamera();
                                   Navigator.pop(context);
@@ -127,7 +128,7 @@ class _FormFillInPageState extends State<FormFillInPage> {
                               ),
                               ListTile(
                                 leading: Icon(Icons.photo_library),
-                                title: Text('Pick from gallery'),
+                                title: Text('pick from gallery'.tr().toString()),
                                 onTap: () {
                                   _getImageFromGallery();
                                   Navigator.pop(context);
@@ -159,7 +160,7 @@ class _FormFillInPageState extends State<FormFillInPage> {
                 TextFormField(
                   controller: _titleController,
                   decoration: InputDecoration(
-                    labelText: 'Title',
+                    labelText: 'title'.tr().toString(),
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {

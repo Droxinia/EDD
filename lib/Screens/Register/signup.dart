@@ -71,8 +71,8 @@ class _SignupState extends State<Signup> {
                   }
                 },
                 icon: const Icon(Icons.arrow_forward),
-                label: const Text(
-                  'signup',
+                label:  Text(
+                  'signup'.tr().toString(),
                   style: TextStyle(fontSize: 24),
                 )),
             const SizedBox(

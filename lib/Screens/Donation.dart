@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class DonationPage extends StatefulWidget {
@@ -19,8 +20,8 @@ class _DonationPageState extends State<DonationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Donation",
+             Text(
+              "donation".tr().toString(),
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16.0),
