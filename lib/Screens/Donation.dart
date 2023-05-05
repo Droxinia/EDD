@@ -39,7 +39,7 @@ class _DonationPageState extends State<DonationPage> {
                         final bankAccountNumber =
                             donation["bank_account_number"];
                         final imageUrl = donation["image_url"];
-                        final timeAgo = donation["time_ago"];
+                        //final timeAgo = donation["time_ago"];
 
                         return Container(
                           height: 200.0,

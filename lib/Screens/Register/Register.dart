@@ -3,10 +3,10 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edd/Components/base.dart';
-import 'package:edd/Screens/Register/signin.dart';
 import 'package:edd/Screens/Register/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -119,42 +119,111 @@ class _RegisterState extends State<Register> {
         },
         child: Icon(Icons.language),
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 430, 0, 0),
-        child: Column(
-          children: [
-            AnimatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Signup()));
-              },
-              child: Text("sign in".tr().toString()),
+      backgroundColor: Colors.blue,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 80),
+            child: Center(
+              child: Lottie.network(
+                'https://assets10.lottiefiles.com/packages/lf20_pzuipcff.json',
+                height: 200,
+                width: 200,
+              ),
             ),
-            const SizedBox(
-              height: 25,
-            ),
-            AnimatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              StreamBuilder<User?>(
-                                  stream:
-                                      FirebaseAuth.instance.authStateChanges(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Base();
-                                    } else {
-                                      return Signup();
-                                    }
-                                  })));
-                },
-                child: Text("sign Up".tr().toString()))
-          ],
-        ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Text(
+                'One country',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'one people',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'Together',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Signup()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    onPrimary: Colors.blue,
+                  ),
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                StreamBuilder<User?>(
+                                    stream: FirebaseAuth.instance
+                                        .authStateChanges(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return Base();
+                                      } else {
+                                        return Signup();
+                                      }
+                                    })));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    onPrimary: Colors.blue,
+                  ),
+                  child: Text(
+                    'Continue',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
