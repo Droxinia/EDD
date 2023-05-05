@@ -18,9 +18,9 @@ class Base extends StatefulWidget {
 class _BaseState extends State<Base> {
   int _currentindex = 0;
   final tabs = [
-    const Donation(),
+    DonationPage(),
     DonationRequestPage(),
-    const Formfillin(),
+    const FormFillInPage(),
     ProfilePage(),
     const Settings()
   ];
