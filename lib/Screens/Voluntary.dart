@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DonationRequestPage extends StatefulWidget {
+  const DonationRequestPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _DonationRequestPageState createState() => _DonationRequestPageState();
 }
 
@@ -11,7 +14,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _phoneController = TextEditingController();
-  String _imageUrl = '';
+  final String _imageUrl = '';
   late DateTime _requestTime;
 
   @override
@@ -42,6 +45,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
         'requestTime': _requestTime,
       });
 
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     }
   }
@@ -50,7 +54,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request Donation'),
+        title: const Text('Request Donation'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,7 +64,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Title',
                 ),
                 validator: (value) {
@@ -72,7 +76,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                 ),
                 validator: (value) {
@@ -84,7 +88,7 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Phone Number',
                 ),
                 validator: (value) {
@@ -106,7 +110,9 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
                           builder: (BuildContext context) => VolunteerPage()));
                 },
                 child: Text('go to list'),
+             
               ),
+              
             ],
           ),
         ),
@@ -116,17 +122,19 @@ class _DonationRequestPageState extends State<DonationRequestPage> {
 }
 
 class VolunteerPage extends StatelessWidget {
+  const VolunteerPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Volunteer'),
+        title: const Text('Volunteer'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('volunteers').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -147,12 +155,12 @@ class VolunteerPage extends StatelessWidget {
                 leading: imageUrl != null ? Image.network(imageUrl) : null,
                 title: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(requestTime.toString()),
-                trailing: Icon(Icons.arrow_forward),
+                trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -199,22 +207,22 @@ class DonationDetailsPage extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     'Phone: $phone',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
